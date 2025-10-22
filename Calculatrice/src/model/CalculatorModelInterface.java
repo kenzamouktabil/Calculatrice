@@ -4,7 +4,7 @@ public interface CalculatorModelInterface {
 	
 	void add();
 	void substract();
-	void multipy();
+	void multiply(); 
 	void divide();
 	void opposite();
 	
