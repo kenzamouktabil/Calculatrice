@@ -1,1 +1,16 @@
-/bin/
+# Fichiers compilés Java
+*.class
+bin/
+
+# Fichiers IDE
+.vscode/
+.idea/
+*.iml
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers temporaires
+*.tmp
+*.log
