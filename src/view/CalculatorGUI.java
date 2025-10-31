@@ -31,22 +31,22 @@ public class CalculatorGUI extends Application implements CalculatorGUIInterface
         // Le contrôleur sera créé dans start()
     }
 
-    // Point d’entrée JavaFX : création de l’interface graphique
+    // Point d'entrée JavaFX : création de l'interface graphique
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Calculatrice RPN");
 
-        // 1. Création de la zone d’affichage
+        // 1. Création de la zone d'affichage
         VBox displayArea = createDisplayArea();
 
         // 2. Création du clavier
         GridPane keyboard = createKeyboard();
 
-        // 3. Création du contrôleur (après l’interface)
+        // 3. Création du contrôleur (après l'interface)
         controller = new CalculatorController();
         controller.setView(this);
 
-        // 4. Assemblage de l’interface
+        // 4. Assemblage de l'interface
         VBox root = new VBox(10);
         root.setPadding(new Insets(10));
         root.getChildren().addAll(displayArea, keyboard);
@@ -56,7 +56,7 @@ public class CalculatorGUI extends Application implements CalculatorGUIInterface
         primaryStage.show();
     }
 
-    // Crée la zone d’affichage (pile + accumulateur)
+    // Crée la zone d'affichage (pile + accumulateur)
     private VBox createDisplayArea() {
         VBox display = new VBox(5);
         display.setPadding(new Insets(10));
@@ -202,11 +202,17 @@ public class CalculatorGUI extends Application implements CalculatorGUIInterface
         return btn;
     }
 
-    // Méthode appelée par le contrôleur pour mettre à jour l’affichage
+    // Méthode appelée par le contrôleur pour mettre à jour l'affichage de l'accumulateur
+    // Conforme au cahier des charges : première méthode change
     @Override
-    public void change(String accu, List<Double> stackData) {
+    public void change(String accu) {
         accuDisplay.setText(accu);
+    }
 
+    // Méthode appelée par le contrôleur pour mettre à jour l'affichage de la pile
+    // Conforme au cahier des charges : deuxième méthode change (surcharge)
+    @Override
+    public void change(List<Double> stackData) {
         // Affiche les 4 derniers éléments de la pile
         int stackSize = stackData.size();
         for (int i = 0; i < STACK_SIZE; i++) {
@@ -219,13 +225,13 @@ public class CalculatorGUI extends Application implements CalculatorGUIInterface
         }
     }
 
-    // Lance l’application
+    // Lance l'application
     @Override
     public void affiche() {
         launch();
     }
 
-    // Point d’entrée pour exécuter la vue seule
+    // Point d'entrée pour exécuter la vue seule
     public static void main(String[] args) {
         launch(args);
     }

@@ -44,15 +44,20 @@ public class CalculatorController implements CalculatorControllerInterface {
     }
     
     // Met à jour l'affichage de la vue avec les données du modèle
+    // Appelle les deux méthodes change de la vue séparément
     private void updateView() {
         if (view != null) {
+            // Mise à jour de l'accumulateur
             // Si l'utilisateur saisit un nombre, on l'affiche directement
             // Sinon, on affiche la valeur de l'accumulateur
             if (!currentInput.isEmpty()) {
-                view.change(currentInput, model.getMemory());
+                view.change(currentInput);
             } else {
-                view.change(String.valueOf(model.getAccu()), model.getMemory());
+                view.change(String.valueOf(model.getAccu()));
             }
+            
+            // Mise à jour de la pile (appel séparé)
+            view.change(model.getMemory());
         }
     }
     
