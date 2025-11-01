@@ -5,6 +5,7 @@ import java.util.List;
 // Interface de la vue.
 // Définit ce que la vue doit pouvoir faire.
 // Conforme au cahier des charges : deux méthodes change distinctes
+
 public interface CalculatorGUIInterface {
     
     // Méthode appelée par le contrôleur pour mettre à jour l'affichage de l'accumulateur.
