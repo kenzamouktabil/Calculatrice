@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="503.0" prefWidth="352.0" spacing="10" style="-fx-padding: 15;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CalculatorFXMLController">
+    
+    <!-- Zone pile -->
+    <GridPane alignment="TOP_RIGHT" hgap="5" style="-fx-border-color: aab1e4; -fx-border-radius: 8; -fx-padding: 7;" vgap="5">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="100" />
+        </columnConstraints>
+        <children>
+            <Label fx:id="stack3" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="305.0" style="-fx-padding: 4; -fx-font-size: 15; -fx-alignment: center-right;" text="0.0" textAlignment="RIGHT" textFill="#1f33e6" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+            <font>
+               <Font name="Arial" size="8.0" />
+            </font></Label>
+            <Label fx:id="stack2" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="326.0" style="-fx-padding: 4; -fx-font-size: 15; -fx-alignment: center-right;" text="0.0" textAlignment="RIGHT" textFill="#1f33e6" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <font>
+               <Font name="Arial" size="25.0" />
+            </font></Label>
+            <Label fx:id="stack1" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="323.0" style="-fx-padding: 4; -fx-font-size: 15; -fx-alignment: center-right;" text="0.0" textAlignment="RIGHT" textFill="#1f33e6" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+            <font>
+               <Font name="Arial" size="25.0" />
+            </font></Label>
+            <Label fx:id="stack0" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="318.0" style="-fx-padding: 4; -fx-font-size: 15; -fx-alignment: center-right;" text="0.0" textAlignment="RIGHT" textFill="#1f33e6" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+            <font>
+               <Font name="Arial" size="25.0" />
+            </font></Label>
+        </children>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+    </GridPane>
+
+                      <!-- Accumulateur -->
+    <Label fx:id="accuLabel" maxWidth="Infinity" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-alignment: center-right; -fx-border-color: aab1e4; -fx-border-radius: 8; -fx-padding: 7;" text="0.0" textFill="#1f33e6">
+      <font>
+         <Font name="System Bold" size="22.0" />
+      </font>
+   </Label>
+
+    <!-- Clavier -->
+    <GridPane hgap="5" prefHeight="243.0" prefWidth="321.0" style="-fx-border-radius: 8; -fx-padding: 8; -fx-border-color: white; -fx-background-color: #aab1e4; -fx-background-radius: 8;" vgap="5">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+        </columnConstraints>
+
+        <children>
+            <!-- Ligne 1 -->
+            <Button onAction="#onDigit" prefWidth="40.0" style="-fx-background-color: white;" text="7" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+            <font>
+               <Font name="System Bold Italic" size="14.0" />
+            </font></Button>
+            <Button onAction="#onDigit" prefWidth="40.0" style="-fx-background-color: white;" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+            <font>
+               <Font name="System Bold Italic" size="14.0" />
+            </font></Button>
+            <Button onAction="#onDigit" prefWidth="40.0" style="-fx-background-color: white;" text="9" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+            <font>
+               <Font name="System Bold Italic" size="14.0" />
+            </font></Button>
+
+            <!-- Ligne 2 -->
+            <Button onAction="#onDigit" prefWidth="40.0" style="-fx-background-color: white;" text="4" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <font>
+               <Font name="System Bold Italic" size="14.0" />
+            </font></Button>
+            <Button onAction="#onDigit" prefWidth="40.0" style="-fx-background-color: white;" text="5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <font>
+               <Font name="System Bold Italic" size="14.0" />
+            </font></Button>
+            <Button onAction="#onDigit" prefWidth="40.0" style="-fx-background-color: white;" text="6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <font>
+               <Font name="System Bold Italic" size="14.0" />
+            </font></Button>
+
+            <!-- Ligne 3 -->
+            <Button onAction="#onDigit" prefWidth="40.0" style="-fx-background-color: white;" text="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <font>
+               <Font name="System Bold Italic" size="14.0" />
+            </font></Button>
+            <Button onAction="#onDigit" prefWidth="40.0" style="-fx-background-color: white;" text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <font>
+               <Font name="System Bold Italic" size="14.0" />
+            </font></Button>
+            <Button onAction="#onDigit" prefWidth="40.0" style="-fx-background-color: white;" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <font>
+               <Font name="System Bold Italic" size="14.0" />
+            </font></Button>
+            <Button onAction="#onOp" prefHeight="32.0" prefWidth="40.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" text="-" textFill="#1f33e6" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <font>
+               <Font name="System Bold" size="15.0" />
+            </font></Button>
+
+            <!-- Ligne 4 -->
+            <Button onAction="#onDigit" prefWidth="40.0" style="-fx-background-color: white;" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <font>
+               <Font name="System Bold Italic" size="14.0" />
+            </font></Button>
+            <Button onAction="#onDot" prefWidth="40.0" style="-fx-background-color: white;" text="." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <font>
+               <Font name="System Bold Italic" size="14.0" />
+            </font></Button>
+            <Button onAction="#onPlusMinus" prefWidth="40.0" style="-fx-background-color: white;" text="+/-" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <font>
+               <Font name="System Bold Italic" size="12.0" />
+            </font></Button>
+            <Button onAction="#onOp" prefHeight="32.0" prefWidth="40.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" text="+" textFill="#1f33e6" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+            <font>
+               <Font name="System Bold" size="15.0" />
+            </font></Button>
+
+            <!-- Ligne 5 -->
+            <Button onAction="#onPush" prefHeight="35.0" prefWidth="236.0" style="-fx-background-color: #1f33e6;" text="PUSH" textFill="WHITE" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font></Button>
+            <Button onAction="#onSwap" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: white;" text="⇄" textFill="GREEN" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+            <font>
+               <Font name="System Bold" size="13.0" />
+            </font></Button>
+
+            <!-- Ligne 6 -->
+            <Button onAction="#onDrop" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: white;" text="DROP" textFill="#1f33e6" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font></Button>
+            <Button onAction="#onClear" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: green;" text="C" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+            <font>
+               <Font name="System Bold" size="15.0" />
+            </font></Button>
+            <Button onAction="#onOp" prefHeight="32.0" prefWidth="40.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" text="/" textFill="#1f33e6" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <font>
+               <Font name="System Bold" size="15.0" />
+            </font>
+         </Button>
+            <Button onAction="#onOp" prefHeight="32.0" prefWidth="40.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" text="*" textFill="#1f33e6" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <font>
+               <Font name="System Bold" size="15.0" />
+            </font>
+         </Button>
+        </children>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+         <Insets top="10.0" />
+      </opaqueInsets>
+    </GridPane>
+
+</VBox>

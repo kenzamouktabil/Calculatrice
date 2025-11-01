@@ -231,6 +231,18 @@ public class CalculatorGUI extends Application implements CalculatorGUIInterface
         launch();
     }
 
+    @Override
+    public void showError(String message) {
+        // Affiche une alerte JavaFX graphique (popup)
+        javafx.application.Platform.runLater(() -> {
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Une erreur est survenue");
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
+    }
+
     // Point d'entrée pour exécuter la vue seule
     public static void main(String[] args) {
         launch(args);
