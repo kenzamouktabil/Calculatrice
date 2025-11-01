@@ -163,4 +163,11 @@ public class CalculatorController implements CalculatorControllerInterface {
     public CalculatorModel getModel() {
         return model;
     }
+    
+    public void error(String message) {
+        if (view != null) {
+            view.showError(message);
+        }
+    }
+
 }

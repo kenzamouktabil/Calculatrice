@@ -13,4 +13,6 @@ public interface CalculatorControllerInterface {
     // Méthode appelée par le modèle quand la pile change.
     // @param stackData : nouveau contenu de la pile
     void change(List<Double> stackData);
+    void error(String message);
+
 }

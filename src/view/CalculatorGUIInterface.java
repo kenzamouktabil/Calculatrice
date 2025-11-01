@@ -15,6 +15,8 @@ public interface CalculatorGUIInterface {
     // @param stackData : contenu de la pile à afficher
     void change(List<Double> stackData);
     
+    void showError(String message);
+
     // Lance l'interface graphique.
     void affiche();
 }

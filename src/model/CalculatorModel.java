@@ -85,7 +85,7 @@ public class CalculatorModel implements CalculatorModelInterface {
     @Override
     public void add() {
         if (memory.size() < 2) {
-            System.out.println("Pile insuffisante ! Il faut au moins 2 éléments.");
+        	notifyError("Pile insuffisante : il faut au moins 2 éléments.");
         } else {
             double n2 = memory.pop();
             double n1 = memory.pop();
@@ -98,7 +98,7 @@ public class CalculatorModel implements CalculatorModelInterface {
     @Override
     public void substract() {
         if (memory.size() < 2) {
-            System.out.println("Pile insuffisante ! Il faut au moins 2 éléments.");
+        	notifyError("Pile insuffisante : il faut au moins 2 éléments.");
         } else {
             double n2 = memory.pop();
             double n1 = memory.pop();
@@ -111,7 +111,7 @@ public class CalculatorModel implements CalculatorModelInterface {
     @Override
     public void multiply() {
         if (memory.size() < 2) {
-            System.out.println("Pile insuffisante ! Il faut au moins 2 éléments.");
+        	notifyError("Pile insuffisante : il faut au moins 2 éléments.");
         } else {
             double n2 = memory.pop();
             double n1 = memory.pop();
@@ -124,7 +124,7 @@ public class CalculatorModel implements CalculatorModelInterface {
     @Override
     public void divide() {
         if (memory.size() < 2) {
-            System.out.println("Pile insuffisante ! Il faut au moins 2 éléments.");
+        	notifyError("Pile insuffisante : il faut au moins 2 éléments.");
         } else {
             double n2 = memory.pop(); // Diviseur
             double n1 = memory.pop(); // Dividende
@@ -133,7 +133,7 @@ public class CalculatorModel implements CalculatorModelInterface {
                 accu = n1 / n2;
                 notifyController();
             } else {
-                System.out.println("Erreur : division par zéro !");
+                notifyError("Erreur : division par zéro !");
                 memory.push(n1);
                 memory.push(n2);
             }
@@ -161,4 +161,9 @@ public class CalculatorModel implements CalculatorModelInterface {
     public Stack<Double> getMemory() {
         return memory;
     }
+    
+    private void notifyError(String msg) {
+        if (controller != null) controller.error(msg);
+    }
+
 }
