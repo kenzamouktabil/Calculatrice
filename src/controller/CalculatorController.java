@@ -4,51 +4,45 @@ import java.util.List;
 import model.CalculatorModel;
 import view.CalculatorGUIInterface;
 
-// Contrôleur de la calculatrice RPN.
-// Fait le lien entre le modèle et la vue : reçoit les actions de l'utilisateur, met à jour le modèle, puis notifie la vue.
 public class CalculatorController implements CalculatorControllerInterface {
     
-    // Référence vers le modèle (logique métier)
+    // Référence vers le modèle
     private CalculatorModel model;
     
-    // Référence vers la vue (interface graphique)
+    // Référence vers la vue
     private CalculatorGUIInterface view;
     
     // Stocke la saisie numérique en cours
     private String currentInput = "";
     
-    // Constructeur : crée le modèle et l'associe à ce contrôleur
+    // Crée le modèle et l'associe à ce contrôleur
     public CalculatorController() {
         this.model = new CalculatorModel();
-        // Enregistre ce contrôleur dans le modèle pour recevoir les notifications via change()
         this.model.setController(this);
     }
     
-    // Enregistre la vue (appelé après sa création)
+    // Enregistre la vue
     public void setView(CalculatorGUIInterface view) {
         this.view = view;
-        // Initialise l'affichage
         updateView();
     }
     
-    // Callback : appelée par le modèle quand l'accumulateur change
+    // Appelée par le modèle quand l'accumulateur change
     @Override
     public void change(String accu) {
         updateView();
     }
     
-    // Callback : appelée par le modèle quand la pile change
+    // Appelée par le modèle quand la pile change
     @Override
     public void change(List<Double> stackData) {
         updateView();
     }
     
-    // Met à jour l'affichage de la vue avec les données du modèle
-    // Appelle les deux méthodes change de la vue séparément
+    // Met à jour l'affichage de la vue
     private void updateView() {
         if (view != null) {
-            // Mise à jour de l'accumulateur
-            // Si l'utilisateur saisit un nombre, on l'affiche directement
+            // Si l'utilisateur saisit un nombre, on l'affiche
             // Sinon, on affiche la valeur de l'accumulateur
             if (!currentInput.isEmpty()) {
                 view.change(currentInput);
@@ -56,13 +50,12 @@ public class CalculatorController implements CalculatorControllerInterface {
                 view.change(String.valueOf(model.getAccu()));
             }
             
-            // Mise à jour de la pile (appel séparé)
+            // Mise à jour de la pile
             view.change(model.getMemory());
         }
     }
     
-    // Gère l'appui sur un chiffre (0–9)
-    // Appelé par la vue quand l'utilisateur clique sur un bouton numérique
+    // Gère l'appui sur un chiffre
     public void onDigitPressed(String digit) {
         currentInput += digit;
         updateView();
@@ -78,7 +71,7 @@ public class CalculatorController implements CalculatorControllerInterface {
         updateView();
     }
     
-    // Gère l'appui sur le bouton +/- (change le signe du nombre)
+    // Gère l'appui sur le bouton +/- (change le signe)
     public void onPlusMinusPressed() {
         if (!currentInput.isEmpty()) {
             // Si une saisie est en cours, on inverse son signe
@@ -94,44 +87,39 @@ public class CalculatorController implements CalculatorControllerInterface {
         updateView();
     }
     
-    // Gère l'appui sur le bouton PUSH (Entrée)
-    // Valide la saisie et empile le nombre sur la pile
-    // En RPN, on doit toujours pousser avant de faire une opération
-    // Si aucune saisie en cours, on PUSH directement l'accumulateur (résultat d'une opération)
+    // Gère l'appui sur le bouton PUSH
+    // Empile le nombre sur la pile
     public void onPushPressed() {
         if (!currentInput.isEmpty()) {
-            // Si on saisit un nombre, on le met dans l'accu et on PUSH
             try {
                 double value = Double.parseDouble(currentInput);
                 model.setAccu(value);
-                currentInput = ""; // Efface la saisie AVANT de pusher
-                model.push(); // Empile la valeur
+                currentInput = "";
+                model.push();
             } catch (NumberFormatException e) {
-                // Si la saisie n'est pas un nombre valide, on la réinitialise
                 currentInput = "";
             }
         } else {
-            // Si aucune saisie, on PUSH directement l'accumulateur (résultat d'une opération)
+            // PUSH directement l'accumulateur si aucune saisie
             model.push();
         }
     }
     
-    // Gère l'appui sur une opération arithmétique (+, -, *, /)
-    // En RPN, il faut d'abord PUSHER la saisie avant de calculer
+    // Gère l'appui sur une opération arithmétique
     public void onOperationPressed(String operation) {
         // Si un nombre est en cours de saisie, on le PUSH automatiquement
         if (!currentInput.isEmpty()) {
             try {
                 double value = Double.parseDouble(currentInput);
                 model.setAccu(value);
-                model.push(); // PUSH automatique avant l'opération
+                model.push();
                 currentInput = "";
             } catch (NumberFormatException e) {
                 // On ignore les erreurs de saisie
             }
         }
         
-        // Exécute l'opération selon le symbole
+        // Exécute l'opération
         switch (operation) {
             case "+":
                 model.add();
@@ -148,12 +136,12 @@ public class CalculatorController implements CalculatorControllerInterface {
         }
     }
     
-    // Gère l'appui sur SWAP (échange les deux derniers éléments de la pile)
+    // Gère l'appui sur SWAP
     public void onSwapPressed() {
         model.swap();
     }
     
-    // Gère l'appui sur CLEAR (efface la saisie et l'accumulateur)
+    // Gère l'appui sur CLEAR
     public void onClearPressed() {
         currentInput = "";
         model.clear();
@@ -164,6 +152,7 @@ public class CalculatorController implements CalculatorControllerInterface {
         return model;
     }
     
+    // Appelée par le modèle pour afficher une erreur
     public void error(String message) {
         if (view != null) {
             view.showError(message);

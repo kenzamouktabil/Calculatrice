@@ -2,17 +2,15 @@ package controller;
 
 import java.util.List;
 
-// Interface du contrôleur.
-// Définit le lien entre le modèle, le contrôleur et la vue.
 public interface CalculatorControllerInterface {
     
-    // Méthode appelée par le modèle quand l'accumulateur change.
-    // @param accu : nouvelle valeur de l'accumulateur
+    // Appelée par le modèle quand l'accumulateur change
     void change(String accu);
     
-    // Méthode appelée par le modèle quand la pile change.
-    // @param stackData : nouveau contenu de la pile
+    // Appelée par le modèle quand la pile change
     void change(List<Double> stackData);
+    
+    // Appelée par le modèle en cas d'erreur
     void error(String message);
 
 }

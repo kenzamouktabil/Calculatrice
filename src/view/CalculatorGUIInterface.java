@@ -2,22 +2,17 @@ package view;
 
 import java.util.List;
 
-// Interface de la vue.
-// Définit ce que la vue doit pouvoir faire.
-// Conforme au cahier des charges : deux méthodes change distinctes
-
 public interface CalculatorGUIInterface {
     
-    // Méthode appelée par le contrôleur pour mettre à jour l'affichage de l'accumulateur.
-    // @param accu : valeur à afficher dans l'accumulateur
+    // Appelée par le contrôleur pour mettre à jour l'affichage de l'accumulateur
     void change(String accu);
     
-    // Méthode appelée par le contrôleur pour mettre à jour l'affichage de la pile.
-    // @param stackData : contenu de la pile à afficher
+    // Appelée par le contrôleur pour mettre à jour l'affichage de la pile
     void change(List<Double> stackData);
     
+    // Appelée par le contrôleur pour afficher un message d'erreur
     void showError(String message);
 
-    // Lance l'interface graphique.
+    // Lance l'interface graphique
     void affiche();
 }

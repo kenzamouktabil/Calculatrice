@@ -1,8 +1,5 @@
 package model;
 
-// INTERFACE DU MODÈLE
-//Définit le contrat que le modèle doit respecter
-
 public interface CalculatorModelInterface {
     
     // Opérations arithmétiques de base

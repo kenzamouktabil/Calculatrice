@@ -2,33 +2,30 @@ package model;
 
 import java.util.Stack;
 import controller.CalculatorControllerInterface;
-
-// Modèle de la calculatrice RPN.
-// Gère toute la logique métier : l'accumulateur (valeur courante) et la pile (opérandes utilisées pour les calculs).
  
 public class CalculatorModel implements CalculatorModelInterface {
     
     // Accumulateur : stocke la valeur courante
     private double accu;
     
-    // Pile utilisée pour mémoriser les opérandes
+    // Pile pour mémoriser les opérandes
     private Stack<Double> memory;
     
-    // Référence vers le contrôleur pour notifier les changements
+    // Référence vers le contrôleur pour les notifications
     private CalculatorControllerInterface controller;
     
-    // Constructeur : initialise l'accumulateur à 0 et crée une pile vide. 
+    // Initialise l'accumulateur à 0 et crée une pile vide
     public CalculatorModel() {
         this.accu = 0.0;
         this.memory = new Stack<>();
     }
     
-    // Associe le contrôleur au modèle pour pouvoir l'avertir des mises à jour. 
+    // Associe le contrôleur au modèle
     public void setController(CalculatorControllerInterface controller) {
         this.controller = controller;
     }
     
-    // Informe le contrôleur qu'un changement a eu lieu pour mettre à jour la vue. 
+    // Informe le contrôleur qu'un changement a eu lieu
     private void notifyController() {
         if (controller != null) {
             controller.change(String.valueOf(accu));
@@ -36,7 +33,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         }
     }
     
-    // PUSH : empile l'accumulateur sur la pile, puis le remet à zéro. 
+    // Empile l'accumulateur sur la pile, puis le remet à zéro
     @Override
     public void push() {
         memory.push(accu);
@@ -44,7 +41,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         notifyController();
     }
     
-    // POP : dépile la dernière valeur et la met dans l'accumulateur. 
+    // Dépile la dernière valeur et la met dans l'accumulateur
     @Override
     public void pop() {
         if (!memory.isEmpty()) {
@@ -53,7 +50,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         }
     }
     
-    // DROP : supprime simplement le dernier élément de la pile. 
+    // Supprime le dernier élément de la pile
     @Override
     public void drop() {
         if (!memory.isEmpty()) {
@@ -62,7 +59,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         }
     }
     
-    // SWAP : échange les deux derniers éléments de la pile (ex : [1,2,3] → [1,3,2]). 
+    // Échange les deux derniers éléments de la pile
     @Override
     public void swap() {
         if (memory.size() >= 2) {
@@ -72,16 +69,19 @@ public class CalculatorModel implements CalculatorModelInterface {
             memory.push(second);
             notifyController();
         }
+        else {
+        	notifyError("Pile insuffisante : il faut au moins 2 éléments.");
+        }
     }
     
-    // CLEAR : remet l'accumulateur à zéro. 
+    // Remet l'accumulateur à zéro
     @Override
     public void clear() {
         accu = 0.0;
         notifyController();
     }
     
-    // ADD : additionne les deux dernières valeurs de la pile (ex : [3,4] → accu=7). 
+    // Additionne les deux dernières valeurs de la pile
     @Override
     public void add() {
         if (memory.size() < 2) {
@@ -94,7 +94,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         }
     }
     
-    // SUBSTRACT : soustrait les deux dernières valeurs (ex : [3,4] → accu=-1). 
+    // Soustrait les deux dernières valeurs de la pile
     @Override
     public void substract() {
         if (memory.size() < 2) {
@@ -107,7 +107,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         }
     }
     
-    // MULTIPLY : multiplie les deux dernières valeurs (ex : [3,4] → accu=12). 
+    // Multiplie les deux dernières valeurs de la pile
     @Override
     public void multiply() {
         if (memory.size() < 2) {
@@ -120,7 +120,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         }
     }
     
-    // DIVIDE : divise les deux dernières valeurs (ex : [8,2] → accu=4). 
+    // Divise les deux dernières valeurs de la pile
     @Override
     public void divide() {
         if (memory.size() < 2) {
@@ -140,20 +140,20 @@ public class CalculatorModel implements CalculatorModelInterface {
         }
     }
     
-    // OPPOSITE : inverse le signe de la valeur courante (ex : 5 → -5). 
+    // Inverse le signe de la valeur courante
     @Override
     public void opposite() {
         accu = -accu;
         notifyController();
     }
     
-    // Met à jour la valeur de l'accumulateur (utilisée lors de la saisie). 
+    // Met à jour la valeur de l'accumulateur
     public void setAccu(double value) {
         this.accu = value;
         notifyController();
     }
     
-    // Accesseurs (utiles pour les tests). 
+    // Accesseurs pour les tests
     public double getAccu() {
         return accu;
     }
@@ -162,6 +162,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         return memory;
     }
     
+    // Envoie un message d'erreur au contrôleur
     private void notifyError(String msg) {
         if (controller != null) controller.error(msg);
     }
