@@ -6,14 +6,12 @@ import view.CalculatorGUIInterface;
 
 public class CalculatorController implements CalculatorControllerInterface {
     
-    // Référence vers le modèle
     private CalculatorModel model;
-    
-    // Référence vers la vue
+
     private CalculatorGUIInterface view;
     
-    // Stocke la saisie numérique en cours
     private String currentInput = "";
+    
     
     // Crée le modèle et l'associe à ce contrôleur
     public CalculatorController() {

@@ -5,10 +5,10 @@ import controller.CalculatorControllerInterface;
  
 public class CalculatorModel implements CalculatorModelInterface {
     
-    // Accumulateur : stocke la valeur courante
+
     private double accu;
     
-    // Pile pour mémoriser les opérandes
+
     private Stack<Double> memory;
     
     // Référence vers le contrôleur pour les notifications
