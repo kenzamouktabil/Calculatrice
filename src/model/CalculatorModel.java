@@ -5,16 +5,13 @@ import controller.CalculatorControllerInterface;
  
 public class CalculatorModel implements CalculatorModelInterface {
     
-
     private double accu;
-    
 
-    private Stack<Double> memory;
-    
-    // Référence vers le contrôleur pour les notifications
+    private Stack<Double> memory;    
+
     private CalculatorControllerInterface controller;
     
-    // Initialise l'accumulateur à 0 et crée une pile vide
+    // Initialiser l'accumulateur à 0 + creation d'une pile vide
     public CalculatorModel() {
         this.accu = 0.0;
         this.memory = new Stack<>();
@@ -25,7 +22,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         this.controller = controller;
     }
     
-    // Informe le contrôleur qu'un changement a eu lieu
+    // Informer le contrôleur qu'un changement a eu lieu
     private void notifyController() {
         if (controller != null) {
             controller.change(String.valueOf(accu));
@@ -33,7 +30,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         }
     }
     
-    // Empile l'accumulateur sur la pile, puis le remet à zéro
+    // Empiler l'accumulateur sur la pile +  le remet à zéro
     @Override
     public void push() {
         memory.push(accu);
@@ -41,7 +38,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         notifyController();
     }
     
-    // Dépile la dernière valeur et la met dans l'accumulateur
+    // Dépile la dernière valeur + la met dans l'accumulateur
     @Override
     public void pop() {
         if (!memory.isEmpty()) {
